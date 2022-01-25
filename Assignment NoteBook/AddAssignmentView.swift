@@ -28,7 +28,6 @@ struct AddAssignmentView: View {
                        
                     }
                 }
-                ColorPicker("Pick a Color", selection: $highlight)
             }
             .navigationBarTitle("Add New Assignment", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
