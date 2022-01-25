@@ -12,8 +12,10 @@ struct AddAssignmentView: View {
     @State private var course = ""
     @State private var description = ""
     @State private var dueDate = Date()
+   
+    
     @Environment(\.presentationMode) var presentationMode
-    static let courses = ["Math", "Science", "History"]
+    static let courses = ["Math", "Science", "History", "English", "Spanish", "Mobile Apps Development", "Graphic Design"]
     var body: some View {
         NavigationView {
             Form {
@@ -23,10 +25,19 @@ struct AddAssignmentView: View {
                     ForEach(Self.courses, id: \.self) {
                         course in
                         Text(course)
+                       
                     }
                 }
+                ColorPicker("Pick a Color", selection: $highlight)
             }
             .navigationBarTitle("Add New Assignment", displayMode: .inline)
+            .navigationBarItems(trailing: Button("Save") {
+                if course.count > 0 && description.count > 0 {
+                    let item = AssignmentItem(id: UUID(), course: course, description: description, dueDate: dueDate)
+                    assignmentList.items.append(item)
+                    presentationMode.wrappedValue.dismiss()
+                }
+            })
         }
     }
 }

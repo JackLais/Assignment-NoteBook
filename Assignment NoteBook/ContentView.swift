@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
- 
+
 struct ContentView: View {
     @ObservedObject var assignmentList = AssignmentList()
     @State private var showingAddAssignmentView = false
+    init () {
+        UITableView.appearance().backgroundColor = .blue
+    }
     var body: some View {
         NavigationView {
             List {
@@ -23,6 +26,9 @@ struct ContentView: View {
                         Spacer()
                         Text(item.dueDate, style: .date)
                     }
+                    
+                    .listRowBackground(Color.orange)
+                    
                 }
                 .onMove(perform: { indices, newOffset in
                     assignmentList.items.move(fromOffsets: indices, toOffset: newOffset)
@@ -41,8 +47,13 @@ struct ContentView: View {
                                 })
         }
     }
+    func highlight(_: AssignmentList) {
+        
+    }
 }
- 
+
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -53,6 +64,6 @@ struct AssignmentItem: Identifiable, Codable {
     var course = String()
     var description = String()
     var dueDate = Date()
+  
 }
- 
- 
+
